@@ -19,6 +19,12 @@ Globals:
       Variables:
         POWERTOOLS_SERVICE_NAME: sample
         POWERTOOLS_LOGGER_LOG_EVENT: true
+  Api:
+    Cors:
+      AllowMethods: "'GET'"
+      AllowHeaders: "'Content-Type, X-Forwarded-For'"
+      AllowOrigin: "'*'"
+      MaxAge: "'1'"
 
 Resources:
   ##########################################################################
@@ -33,6 +39,12 @@ Resources:
       CodeUri: src
       Layers:
         - !Sub arn:aws:lambda:${AWS::Region}:017000801446:layer:AWSLambdaPowertoolsPython:20
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: ANY
 
   MyLambdaFunctionPermission:
     Type: AWS::Lambda::Permission
@@ -102,3 +114,6 @@ Resources:
 Outputs:
   EndpointUrl:
     Value: !Sub "http://${MyLoadBalancer.DNSName}/hello"
+
+  ApiEndpointUrl:
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello"
