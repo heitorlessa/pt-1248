@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "pt-1248"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1pssy5gdxqcao"
+s3_prefix = "pt-1248"
+region = "eu-west-1"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "VpcId=\"vpc-0f487f68fa74a285a\" Subnets=\"subnet-03943f5f5b467e308,subnet-03d6c537d3f69dc71\""
+image_repositories = []
